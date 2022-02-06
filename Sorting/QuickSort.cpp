@@ -46,10 +46,6 @@ void quickSort(int a[], int low, int high)
     if (low < high)
     {
         int pi = partition(a, low, high);
-        for (int i = 0; i < 6; i++)
-        {
-            cout << a[i] << " ";
-        }
         quickSort(a, low, pi - 1);
         quickSort(a, pi + 1, high);
     }
