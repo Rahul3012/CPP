@@ -21,7 +21,7 @@ int partition(int a[], int low, int high)
 {
     int i, j, val;
     i = low;
-    j = high;
+    j = high + 1;
     pivot(a, low, high - 1);
     val = a[i];
     cout << endl
@@ -48,7 +48,7 @@ int partition(int a[], int low, int high)
     } while (i < j);
     swap(a + j, a + low);
     cout << endl;
-    return i;
+    return j;
 }
 void quickSort(int a[], int low, int high)
 {
@@ -68,8 +68,11 @@ void quickSort(int a[], int low, int high)
 }
 int main()
 {
-    int a[6] = {24, 9, 29, 14, 19, 27};
-
+    int a[6];
+    for (int i = 0; i < 6; i++)
+    {
+        cin >> a[i];
+    }
     // int pivotfixposition = partition(a, 0, 6);
     // cout << "\n"
     //      << pivotfixposition << endl;
