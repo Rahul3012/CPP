@@ -3,7 +3,6 @@ using namespace std;
 
 void swap(int *a, int *b)
 {
-    cout << "swap " << *a << " " << *b;
     int t = *a;
     *a = *b;
     *b = t;
@@ -11,7 +10,6 @@ void swap(int *a, int *b)
 
 void pivot(int *a, int low, int high)
 {
-    cout << "check pivot " << a[low] << " " << a[high] << endl;
     if (a[low] < a[high])
     {
         swap(a + low, a + high);
@@ -24,23 +22,16 @@ int partition(int a[], int low, int high)
     j = high + 1;
     pivot(a, low, high - 1);
     val = a[i];
-    cout << endl
-         << "val" << val << endl;
-    cout << "i " << i << "j " << j << endl;
     do
     {
         do
         {
             ++i;
         } while (a[i] < val);
-        cout << "\n"
-             << "i " << i << endl;
         do
         {
             --j;
         } while (a[j] > val);
-        cout << "\n"
-             << "j " << j << endl;
         if (i < j)
         {
             swap(a + i, a + j);
@@ -55,9 +46,6 @@ void quickSort(int a[], int low, int high)
     if (low < high)
     {
         int pi = partition(a, low, high);
-
-        cout << endl
-             << "pivot index" << pi << endl;
         for (int i = 0; i < 6; i++)
         {
             cout << a[i] << " ";
