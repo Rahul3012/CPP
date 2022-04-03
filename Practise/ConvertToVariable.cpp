@@ -1,0 +1,58 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+int main()
+{
+    char ch[] = "thisIsEnvironmentVariable";
+    // for (int i = 0; i < 256; i++)
+    // {
+    //     printf("%d : %c \n", i, i);
+    // }
+    bool cppVariable = false;
+    for (int l = 0; l < sizeof(ch); l++)
+    {
+        if (ch[l] == '_')
+        {
+            cppVariable = true;
+            break;
+        }
+    }
+    int j = 0;
+    if (cppVariable)
+    {
+        char converted[sizeof(ch)];
+        for (int i = 0; i < sizeof(ch); i++)
+        {
+            if (ch[i] == '_')
+            {
+                converted[j++] = ch[i + 1] - 32;
+                i++;
+            }
+            else
+            {
+                converted[j++] = ch[i];
+            }
+        }
+        cout << converted;
+    }
+    else
+    {
+        char converted[(sizeof(ch) * 2)];
+        for (int i = 0; i < sizeof(ch); i++)
+        {
+            if (ch[i] >= 65 && ch[i] <= 90)
+            {
+                converted[j++] = '_';
+                converted[j++] = ch[i] + 32;
+            }
+            else
+            {
+                converted[j++] = ch[i];
+            }
+        }
+        cout << converted;
+    }
+
+    return 0;
+}
