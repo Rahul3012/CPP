@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    char ch[] = "thisIsEnvironmentVariable";
+    char ch[] = "thisIsEnvironmentVariable"; // for cpp variable pass this_is_environment_variable
     // for (int i = 0; i < 256; i++)
     // {
     //     printf("%d : %c \n", i, i);
