@@ -11,7 +11,8 @@ int main()
     //     cin>>a[i];
     // }
     int counter = 0;
-    int duplicate[N];
+    int *duplicate;
+    duplicate = (int *)malloc(sizeof(int));
     for (int j = 0; j < N - 1; j++)
     {
         for (int k = j + 1; k < N; k++)
@@ -29,6 +30,7 @@ int main()
                 if (flag == 0)
                 {
                     duplicate[counter++] = arr[k];
+                    duplicate = (int *)realloc(duplicate, sizeof(int) * counter);
                 }
                 flag = 0;
             }
@@ -43,5 +45,6 @@ int main()
     {
         cout << duplicate[g] << " ";
     }
+    free(duplicate);
     return 0;
 }
