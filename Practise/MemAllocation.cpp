@@ -19,9 +19,7 @@ int main()
     }
     else
     {
-
         printf("Memory successfully allocated using malloc.\n");
-
         for (i = 0; i < n; ++i)
         {
             ptr[i] = i + 1;
@@ -44,6 +42,5 @@ int main()
         }
     }
     free(ptr);
-
     return 0;
 }

@@ -38,13 +38,15 @@ int main()
     }
     else
     {
-        char converted[(sizeof(ch) * 2)];
+        char *converted;
+        converted = (char *)calloc(sizeof(ch), sizeof(char));
         for (int i = 0; i < sizeof(ch); i++)
         {
             if (ch[i] >= 65 && ch[i] <= 90)
             {
                 converted[j++] = '_';
                 converted[j++] = ch[i] + 32;
+                converted = (char *)realloc(converted, (sizeof(converted) + sizeof(char)));
             }
             else
             {
