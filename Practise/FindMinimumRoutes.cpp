@@ -4,6 +4,11 @@ using namespace std;
 
 int sqrtAddition(vector<int> a)
 {
+    if (a.empty())
+    {
+        cout << "Invalid" << endl;
+        return 0;
+    }
     int additionresult = 0;
     // can use loop here if there are more than 2 member in array
     additionresult = a[0] * a[0] + a[1] * a[1];
@@ -37,10 +42,18 @@ int partition(vector<vector<int>> &a, int low, int high)
         do
         {
             ++i;
+            cout << "inside i:" << i << " ";
+            if (i > high)
+                break;
+            cout << a[i][0] << endl;
         } while (sqrtAddition(a[i]) < val);
         do
         {
             --j;
+            cout << "inside j";
+            if (j < low)
+                break;
+            cout << a[j][0] << endl;
         } while (sqrtAddition(a[j]) > val);
         if (i < j)
         {
@@ -62,7 +75,7 @@ void quickSort(vector<vector<int>> &a, int low, int high)
 
 int main()
 {
-    vector<vector<int>> arr = {{2, 3}, {5, 3}, {6, 3}, {1, 1}, {2, 4}, {3, 3}, {6, 8}};
+    vector<vector<int>> arr = {{2, 3}, {5, 3}, {6, 3}, {1, 1}, {2, 4}, {3, 3}, {1, 0}};
     quickSort(arr, 0, arr.size() - 1);
 
     for (int i = 0; i < arr.size(); i++)
