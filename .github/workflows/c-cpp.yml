@@ -1,0 +1,31 @@
+name: C++ CI
+
+
+
+on:
+
+  push:
+
+    branches: [ main ]
+
+  pull_request:
+
+
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v3
+
+      - name: Build C++ code
+
+        run: |
+
+          g++ -o myprogram ./day2/security.cpp
+
+          ./myprogram
