@@ -1,26 +1,23 @@
-    name: C++ Build
+name: C++ Build
 
-    on:
-      push:
-        branches: [ "main" ]
-      pull_request:
-        branches: [ "main" ]
+on:
+  push:
+    branches:
+      - main
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-        - name: Checkout code
-          uses: actions/checkout@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-        - name: Install latest g++
-          uses: rlalik/setup-cpp-compiler@v1.2
-          with:
-            compiler: latest
+      - name: Install g++
+        run: sudo apt-get update && sudo apt-get install g++
 
-        - name: Build
-          run: g++ -std=c++17 ./day2/security.cpp -o main
+      - name: Compile C++ code
+        run: g++ -std=c++20 ./day2/security.cpp -o security
 
-        - name: Run
-          run: ./main
+      - name: Run executable
+        run: ./security
