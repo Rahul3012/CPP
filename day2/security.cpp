@@ -1,8 +1,9 @@
 #include <iostream>
 #include <span>
-#include <expected>
+#include <optional> // Changed from expected
 #include <string>
 #include <vector>
+#include <cstring> // Added cstring
 
 using namespace std;
 
@@ -19,11 +20,11 @@ public:
         this->data.assign(data.begin(), data.end());
     }
 
-    expected<string, string> getData() const
+    optional<string> getData() const // Changed to optional
     {
         if (data.empty())
         {
-            return unexpected("no data available");
+            return nullopt; // Changed from unexpected
         }
         return string(data.begin(), data.end());
     }
@@ -37,17 +38,17 @@ int main()
 {
     try
     {
-        const char sensitiveInfo = "Sensitive Information";
+        const char* sensitiveInfo = "Sensitive Information"; // Corrected the type
         SecureData secureData(span<const char>(sensitiveInfo, strlen(sensitiveInfo)));
 
         auto result = secureData.getData();
         if (result)
         {
-            cout << "Retrieved Data: " << result << endl;
+            cout << "Retrieved Data: " << *result << endl; // Dereference optional
         }
         else
         {
-            cerr << "Error: " << result.error() << endl;
+            cerr << "Error: No data available" << endl; // Changed from result.error()
         }
     }
     catch (const exception &e)
