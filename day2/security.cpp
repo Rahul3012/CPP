@@ -1,30 +1,24 @@
 #include <iostream>
 #include <span>
-#include <optional> // Changed from expected
+#include <expected> // Using expected
 #include <string>
 #include <vector>
-#include <cstring> // Added cstring
+#include <cstring>
 
 using namespace std;
 
-class SecureData
-{
+class SecureData {
 public:
-    SecureData(span<const char> data)
-    {
-        if (data.size() > maxSize)
-        {
+    SecureData(span<const char> data) {
+        if (data.size() > maxSize) {
             throw length_error("Data exceed limit");
         }
-
         this->data.assign(data.begin(), data.end());
     }
 
-    optional<string> getData() const // Changed to optional
-    {
-        if (data.empty())
-        {
-            return nullopt; // Changed from unexpected
+    expected<string, string> getData() const { // Using expected
+        if (data.empty()) {
+            return unexpected("No data available"); // Using unexpected
         }
         return string(data.begin(), data.end());
     }
@@ -34,25 +28,18 @@ private:
     vector<char> data;
 };
 
-int main()
-{
-    try
-    {
-        const char* sensitiveInfo = "Sensitive Information"; // Corrected the type
+int main() {
+    try {
+        const char* sensitiveInfo = "Sensitive Information";
         SecureData secureData(span<const char>(sensitiveInfo, strlen(sensitiveInfo)));
 
         auto result = secureData.getData();
-        if (result)
-        {
-            cout << "Retrieved Data: " << *result << endl; // Dereference optional
+        if (result.has_value()) { // Checking if a value is present
+            cout << "Retrieved Data: " << result.value() << endl; // Accessing the value
+        } else {
+            cerr << "Error: " << result.error() << endl; // Accessing the error
         }
-        else
-        {
-            cerr << "Error: No data available" << endl; // Changed from result.error()
-        }
-    }
-    catch (const exception &e)
-    {
+    } catch (const exception& e) {
         cerr << "Exception: " << e.what() << endl;
     }
 }
