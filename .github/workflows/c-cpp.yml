@@ -1,31 +1,26 @@
-name: C++ CI
+    name: C++ Build
 
+    on:
+      push:
+        branches: [ "main" ]
+      pull_request:
+        branches: [ "main" ]
 
+    jobs:
+      build:
+        runs-on: ubuntu-latest
 
-on:
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
 
-  push:
+        - name: Install latest g++
+          uses: rlalik/setup-cpp-compiler@v1.2
+          with:
+            compiler: latest
 
-    branches: [ main ]
+        - name: Build
+          run: g++ -std=c++17 ./day2/security.cpp -o main
 
-  pull_request:
-
-
-
-jobs:
-
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - uses: actions/checkout@v3
-
-      - name: Build C++ code
-
-        run: |
-
-          g++ -o myprogram ./day2/security.cpp
-
-          ./myprogram
+        - name: Run
+          run: ./main
