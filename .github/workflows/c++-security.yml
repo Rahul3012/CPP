@@ -1,0 +1,25 @@
+name: C++ Build
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'day2/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install g++
+        run: sudo apt-get update && sudo apt-get install g++
+
+      - name: Compile C++ code
+        run: g++ -std=c++23 ./day2/security.cpp -o security
+
+      - name: Run executable
+        run: ./security
