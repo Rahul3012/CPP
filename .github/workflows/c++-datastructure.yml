@@ -19,7 +19,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install g++
 
       - name: Compile C++ code
-        run: g++ -std=c++23 ./day2/parallelquicksort.cpp -o sort
+        run: g++ -std=c++23 ./Data\ Structure/parallelquicksort.cpp -o sort
 
       - name: Run executable
         run: ./sort
