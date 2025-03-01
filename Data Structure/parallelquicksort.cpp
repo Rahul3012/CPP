@@ -39,7 +39,7 @@ void quickSortParallel(std::vector<int>& arr, int low, int high) {
 }
 
 int main() {
-    std::vector<int> arr = {5, 2, 8, 1, 9, 4, 7};
+    std::vector<int> arr = {5, 2, 8, 1, 9, 4, 7, -2, -4, 0, -9, -7};
     quickSortParallel(arr, 0, arr.size() - 1);
 
     std::cout << "Sorted array: ";
