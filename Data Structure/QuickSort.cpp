@@ -15,11 +15,12 @@ void pivot(int *a, int low, int high)
         swap(a + low, a + high);
     }
 }
-int partition(int a[], int low, int high)
+
+int partition(int *a, int low, int high)
 {
     int i, j, val;
     i = low;
-    j = high + 1;
+    j = high;
     pivot(a, low, high - 1);
     val = a[i];
     do
@@ -38,10 +39,10 @@ int partition(int a[], int low, int high)
         }
     } while (i < j);
     swap(a + j, a + low);
-    cout << endl;
     return j;
 }
-void quickSort(int a[], int low, int high)
+
+void quickSort(int *a, int low, int high)
 {
     if (low < high)
     {
@@ -50,6 +51,7 @@ void quickSort(int a[], int low, int high)
         quickSort(a, pi + 1, high);
     }
 }
+
 int main()
 {
     int a[6];
@@ -61,7 +63,7 @@ int main()
     // cout << "\n"
     //      << pivotfixposition << endl;
 
-    quickSort(a, 0, 6);
+    quickSort(a, 0, 5);
     cout << endl;
     for (int i = 0; i < 6; i++)
     {

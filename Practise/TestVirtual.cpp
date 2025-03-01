@@ -1,20 +1,23 @@
 #include <iostream>
+#include <crtdbg.h>
+
 using namespace std;
+#define _CRTDBG_MAP_ALLOC
 
 class A
 {
 public:
-    ~A()
+    virtual ~A()
     {
         cout << "A destroyed" << endl;
     }
-    virtual int get()
+    int get()
     {
         return 100;
     }
 };
 
-class C : virtual public A
+class C : public A
 {
 public:
     ~C()
@@ -48,7 +51,7 @@ public:
     }
     int get()
     {
-        cout << C::get() << endl;
+        // cout << C::get() << endl;
         return 55;
     }
 };
@@ -60,11 +63,10 @@ void print(A *a)
 
 int main()
 {
-    A a;
-    B b;
-    D d;
+    A *a = new C();
     // cout << b.get() << endl;
-    print(&a); // 100
-    print(&b); // 5
-    print(&d); // 10
+    print(a); // 100
+    delete a;
+    _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
+    _CrtDumpMemoryLeaks();
 }
